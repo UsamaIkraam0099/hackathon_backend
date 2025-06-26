@@ -15,7 +15,10 @@ const getBooks = asyncHandler(async (req: Request, res: Response) => {
 
   try {
     // get books list with count
-    const books = await Book.find().skip(skip).limit(limit);
+    const books = await Book.find()
+      .skip(skip)
+      .limit(limit)
+      .sort({ updatedAt: -1 });
     const total = await Book.countDocuments();
 
     res.status(200).json({
